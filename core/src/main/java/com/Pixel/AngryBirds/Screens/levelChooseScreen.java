@@ -3,35 +3,33 @@ package com.Pixel.AngryBirds.Screens;
 import com.Pixel.AngryBirds.AngryBirdsGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class FirstScreen implements Screen {
+public class levelChooseScreen implements Screen {
 
     private AngryBirdsGame game;
     private OrthographicCamera camera;
     private Viewport viewport;
+
     private Texture backgroundTexture;
-    private float timeElapsed = 0;
 
     private static final float WORLD_WIDTH = 800;
     private static final float WORLD_HEIGHT = 600;
 
-    public FirstScreen(AngryBirdsGame game){
+    public levelChooseScreen(AngryBirdsGame game){
         this.game = game;
 
-        backgroundTexture = new Texture("loadingScreenBackground.png");
+        backgroundTexture = new Texture("levelChooseScreenBackground.png");
 
 //        camera = new OrthographicCamera();
 //        viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
 //        camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
         this.camera = game.camera;
-        this.viewport =  game.viewport;
+        this.viewport = game.viewport;
     }
 
     @Override
@@ -50,7 +48,6 @@ public class FirstScreen implements Screen {
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
         game.batch.end();
-
     }
 
     @Override
