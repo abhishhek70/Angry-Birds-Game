@@ -1,5 +1,6 @@
 package com.Pixel.AngryBirds;
 
+import com.Pixel.AngryBirds.Screens.HomeScreen;
 import com.Pixel.AngryBirds.Screens.LoadingScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

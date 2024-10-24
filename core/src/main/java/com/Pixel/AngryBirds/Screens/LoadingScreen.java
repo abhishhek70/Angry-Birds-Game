@@ -14,10 +14,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class LoadingScreen implements Screen {
 
     private AngryBirdsGame game;
-    private Texture loadingBackground;
     private OrthographicCamera camera;
     private Viewport viewport;
-    Texture backgroundTexture;
+    private Texture backgroundTexture;
 
     private static final float WORLD_WIDTH = 800;
     private static final float WORLD_HEIGHT = 600;
@@ -43,6 +42,9 @@ public class LoadingScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
+        if (Gdx.input.isTouched()) {
+            game.setScreen(new HomeScreen(game));
+        }
         game.batch.end();
     }
 
@@ -69,6 +71,7 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void dispose() {
-        // Destroy screen's assets here.
+        // Destroy screen's assets here
+        backgroundTexture.dispose();
     }
 }
