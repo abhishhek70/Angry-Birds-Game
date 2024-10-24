@@ -1,8 +1,8 @@
-package com.Pixel.AngryBirds;
+package com.Pixel.AngryBirds.Screens;
 
 import com.badlogic.gdx.Screen;
 
-public class LoadingScreen implements Screen {
+public class HomeScreen implements Screen {
     @Override
     public void show() {
         System.out.printf("Hello world\n");

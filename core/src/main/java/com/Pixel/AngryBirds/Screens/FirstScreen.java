@@ -1,8 +1,9 @@
-package com.Pixel.AngryBirds;
+package com.Pixel.AngryBirds.Screens;
 
 import com.badlogic.gdx.Screen;
 
-public class HomeScreen implements Screen {
+/** First screen of the application. Displayed after the application is created. */
+public class FirstScreen implements Screen {
     @Override
     public void show() {
         System.out.printf("Hello world\n");
