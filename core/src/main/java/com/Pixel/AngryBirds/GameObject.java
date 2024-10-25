@@ -30,8 +30,8 @@ public abstract class GameObject {
         return false;  // if collision not detected
     }
 
-    public void draw(float posX, float posY){
-        game.batch.draw(objectTexture, posX, posY, width, height);
+    public void draw(){
+        game.batch.draw(objectTexture, x, y, width, height);
     }
 
 //    getters and setters

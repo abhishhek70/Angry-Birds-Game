@@ -1,6 +1,7 @@
 package com.Pixel.AngryBirds.Screens;
 
 import com.Pixel.AngryBirds.AngryBirdsGame;
+import com.Pixel.AngryBirds.Slingshot;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -25,6 +26,8 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
     private Viewport viewport;
 
+    private Slingshot slingshot;
+
     private Texture backgroundTexture;
     private Texture pauseButtonTexture;
 
@@ -37,6 +40,8 @@ public class GameScreen implements Screen {
 
     public GameScreen(AngryBirdsGame game){
         this.game = game;
+
+        this.slingshot = new Slingshot(game, "slingshot.png", 50, 50, 200, 100);
 
         backgroundTexture = new Texture("gameBackground.jpg");
         pauseButtonTexture = new Texture("pauseButton.png");
@@ -78,6 +83,7 @@ public class GameScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
+        slingshot.draw();
         game.batch.end();
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
