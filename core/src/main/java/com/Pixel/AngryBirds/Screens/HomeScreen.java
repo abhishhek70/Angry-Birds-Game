@@ -82,7 +82,7 @@ public class HomeScreen implements Screen {
         imageButtonPlay.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new levelChooseScreen(game));  // Change it later
+                game.setScreen(new LevelChooseScreen(game));  // Change it later
             }
         });
 

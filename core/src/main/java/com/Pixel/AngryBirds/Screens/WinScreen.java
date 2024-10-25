@@ -2,7 +2,6 @@ package com.Pixel.AngryBirds.Screens;
 
 import com.Pixel.AngryBirds.AngryBirdsGame;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -19,46 +18,78 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class GameScreen implements Screen {
+public class WinScreen implements Screen {
 
     private AngryBirdsGame game;
     private OrthographicCamera camera;
     private Viewport viewport;
 
     private Texture backgroundTexture;
-    private Texture pauseButtonTexture;
+    private Texture nextButtonTexture;
+    private Texture restartLevelButtonTexture;
+    private Texture menuButtonTexture;
 
-    private ImageButton imageButtonPause;
+    private ImageButton imageButtonNext;
+    private ImageButton imageButtonRestartLevel;
+    private ImageButton imageButtonMenu;
 
     private Stage stage;
 
     private static final float WORLD_WIDTH = 800;
     private static final float WORLD_HEIGHT = 600;
 
-    public GameScreen(AngryBirdsGame game){
+    public WinScreen(AngryBirdsGame game){
         this.game = game;
 
-        backgroundTexture = new Texture("gameBackground.jpg");
-        pauseButtonTexture = new Texture("pauseButton.png");
+        backgroundTexture = new Texture("winScreenBackground.png");
+        nextButtonTexture = new Texture("nextButton.png");
+        restartLevelButtonTexture = new Texture("restartButton.png");
+        menuButtonTexture = new Texture("menuButton.png");
 
         this.camera = game.camera;
         this.viewport =  game.viewport;
 
-        Drawable buttonDrawablePause = new TextureRegionDrawable(new TextureRegion(pauseButtonTexture));
+        Drawable buttonDrawableResume = new TextureRegionDrawable(new TextureRegion(nextButtonTexture));
+        Drawable buttonDrawableRestart = new TextureRegionDrawable(new TextureRegion(restartLevelButtonTexture));
+        Drawable buttonDrawableMenu = new TextureRegionDrawable(new TextureRegion(menuButtonTexture));
 
-        imageButtonPause = new ImageButton(buttonDrawablePause, buttonDrawablePause);
-        imageButtonPause.setSize(100, 50);
-        imageButtonPause.setPosition(0, WORLD_HEIGHT - 75);
+        imageButtonNext = new ImageButton(buttonDrawableResume, buttonDrawableResume);
+        imageButtonNext.setSize(175, 75);
+        imageButtonNext.setPosition(200, 200);
 
-        imageButtonPause.addListener(new ClickListener() {
+        imageButtonRestartLevel = new ImageButton(buttonDrawableRestart, buttonDrawableRestart);
+        imageButtonRestartLevel.setSize(175, 75);
+        imageButtonRestartLevel.setPosition(325, 200);
+
+        imageButtonMenu = new ImageButton(buttonDrawableMenu, buttonDrawableMenu);
+        imageButtonMenu.setSize(175, 75);
+        imageButtonMenu.setPosition(450, 200);
+
+        imageButtonNext.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new PauseScreen(game));
+                game.setScreen(new GameScreen(game));
+            }
+        });
+
+        imageButtonRestartLevel.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new GameScreen(game));
+            }
+        });
+
+        imageButtonMenu.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new LevelChooseScreen(game));
             }
         });
 
         stage = new Stage(viewport);
-        stage.addActor(imageButtonPause);
+        stage.addActor(imageButtonNext);
+        stage.addActor(imageButtonRestartLevel);
+        stage.addActor(imageButtonMenu);
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -79,13 +110,6 @@ public class GameScreen implements Screen {
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
         game.batch.end();
-
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            game.setScreen(new WinScreen(game));
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.L)) {
-            game.setScreen(new LoseScreen(game));
-        }
 
         stage.act(delta);
         stage.draw();
@@ -116,6 +140,8 @@ public class GameScreen implements Screen {
     public void dispose() {
         // Destroy screen's assets here
         backgroundTexture.dispose();
-        pauseButtonTexture.dispose();
+        nextButtonTexture.dispose();
+        restartLevelButtonTexture.dispose();
+        menuButtonTexture.dispose();
     }
 }

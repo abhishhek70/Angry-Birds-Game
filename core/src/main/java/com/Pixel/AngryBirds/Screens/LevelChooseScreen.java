@@ -13,10 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class levelChooseScreen implements Screen {
+public class LevelChooseScreen implements Screen {
 
     private AngryBirdsGame game;
     private OrthographicCamera camera;
@@ -39,7 +38,7 @@ public class levelChooseScreen implements Screen {
     private static final float WORLD_WIDTH = 800;
     private static final float WORLD_HEIGHT = 600;
 
-    public levelChooseScreen(AngryBirdsGame game){
+    public LevelChooseScreen(AngryBirdsGame game){
         this.game = game;
 
         backgroundTexture = new Texture("levelChooseScreenBackground.png");
