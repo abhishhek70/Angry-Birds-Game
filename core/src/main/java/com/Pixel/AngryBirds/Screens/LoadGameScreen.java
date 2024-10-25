@@ -3,6 +3,7 @@ package com.Pixel.AngryBirds.Screens;
 import com.Pixel.AngryBirds.AngryBirdsGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,10 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class levelChooseScreen implements Screen {
+public class LoadGameScreen implements Screen {
 
     private AngryBirdsGame game;
     private OrthographicCamera camera;
@@ -24,54 +26,46 @@ public class levelChooseScreen implements Screen {
 
     private Texture backgroundTexture;
     private Texture backButtonTexture;
-    private Texture levelOne;
-    private Texture levelTwo;
-    private Texture levelThree;
-    private Texture lockedLevel;
+    private Texture filledSlotOneTexture;
+    private Texture filledSlotTwoTexture;
+    private Texture emptySlotTexture;
 
     private ImageButton imageButtonBack;
-    private ImageButton imageButtonLevelOne;
-    private ImageButton imageButtonLevelTwo;
-    private ImageButton imageButtonLevelThree;
+    private ImageButton imageButtonFilledSlotOne;
+    private ImageButton imageButtonFilledSLotTwo;
 
     private Stage stage;
 
     private static final float WORLD_WIDTH = 800;
     private static final float WORLD_HEIGHT = 600;
 
-    public levelChooseScreen(AngryBirdsGame game){
+    public LoadGameScreen(AngryBirdsGame game){
         this.game = game;
 
         backgroundTexture = new Texture("levelChooseScreenBackground.png");
         backButtonTexture = new Texture("backButton.png");
-        levelOne = new Texture("levelOne.png");
-        levelTwo = new Texture("levelTwo.png");
-        levelThree = new Texture("levelThree.png");
-        lockedLevel = new Texture("lockedLevel.png");
-
-        Drawable buttonDrawableBack = new TextureRegionDrawable(new TextureRegion(backButtonTexture));
-        Drawable buttonDrawableLevelOne = new TextureRegionDrawable(new TextureRegion(levelOne));
-        Drawable buttonDrawableLevelTwo = new TextureRegionDrawable(new TextureRegion(levelTwo));
-        Drawable buttonDrawableLevelThree = new TextureRegionDrawable(new TextureRegion(levelThree));
+        filledSlotOneTexture = new Texture("filledSlotOne.png");
+        filledSlotTwoTexture = new Texture("filledSlotTwo.png");
+        emptySlotTexture = new Texture("emptySlot.png");
 
         this.camera = game.camera;
-        this.viewport = game.viewport;
+        this.viewport =  game.viewport;
+
+        Drawable buttonDrawableBack = new TextureRegionDrawable(new TextureRegion(backButtonTexture));
+        Drawable buttonDrawableFilledSlotOne = new TextureRegionDrawable(new TextureRegion(filledSlotOneTexture));
+        Drawable buttonDrawableFilledSlotTwo = new TextureRegionDrawable(new TextureRegion(filledSlotTwoTexture));
 
         imageButtonBack = new ImageButton(buttonDrawableBack, buttonDrawableBack);
         imageButtonBack.setSize(100, 50); // To do
         imageButtonBack.setPosition(0, WORLD_HEIGHT - 75); // To do
 
-        imageButtonLevelOne = new ImageButton(buttonDrawableLevelOne, buttonDrawableLevelOne);
-        imageButtonLevelOne.setSize(200, 100);
-        imageButtonLevelOne.setPosition(WORLD_WIDTH/2 - 300, WORLD_HEIGHT/2 + 100);
+        imageButtonFilledSlotOne = new ImageButton(buttonDrawableFilledSlotOne, buttonDrawableFilledSlotOne);
+        imageButtonFilledSlotOne.setSize(500, 250); // To do
+        imageButtonFilledSlotOne.setPosition(170, 350); // To do
 
-        imageButtonLevelTwo = new ImageButton(buttonDrawableLevelTwo, buttonDrawableLevelTwo);
-        imageButtonLevelTwo.setSize(200, 100);
-        imageButtonLevelTwo.setPosition(WORLD_WIDTH/2 - 100, WORLD_HEIGHT/2 + 100);
-
-        imageButtonLevelThree = new ImageButton(buttonDrawableLevelThree, buttonDrawableLevelThree);
-        imageButtonLevelThree.setSize(200, 100);
-        imageButtonLevelThree.setPosition(WORLD_WIDTH/2 + 100, WORLD_HEIGHT/2 + 100);
+        imageButtonFilledSLotTwo = new ImageButton(buttonDrawableFilledSlotTwo, buttonDrawableFilledSlotTwo);
+        imageButtonFilledSLotTwo.setSize(500, 250); // To do
+        imageButtonFilledSLotTwo.setPosition(170, 225); // To do
 
         imageButtonBack.addListener(new ClickListener() {
             @Override
@@ -80,21 +74,14 @@ public class levelChooseScreen implements Screen {
             }
         });
 
-        imageButtonLevelOne.addListener(new ClickListener() {
+        imageButtonFilledSlotOne.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new GameScreen(game));  // Change it later
             }
         });
 
-        imageButtonLevelTwo.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));  // Change it later
-            }
-        });
-
-        imageButtonLevelThree.addListener(new ClickListener() {
+        imageButtonFilledSLotTwo.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new GameScreen(game));  // Change it later
@@ -103,9 +90,8 @@ public class levelChooseScreen implements Screen {
 
         stage = new Stage(viewport);
         stage.addActor(imageButtonBack);
-        stage.addActor(imageButtonLevelOne);
-        stage.addActor(imageButtonLevelTwo);
-        stage.addActor(imageButtonLevelThree);
+        stage.addActor(imageButtonFilledSlotOne);
+        stage.addActor(imageButtonFilledSLotTwo);
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -125,12 +111,8 @@ public class levelChooseScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
-        game.batch.draw(lockedLevel, WORLD_WIDTH/2 - 237, WORLD_HEIGHT/2 - 50, 110, 100);
-        game.batch.draw(lockedLevel, WORLD_WIDTH/2 - 237 + 200, WORLD_HEIGHT/2 - 50, 110, 100);
-        game.batch.draw(lockedLevel, WORLD_WIDTH/2 - 237 + 400, WORLD_HEIGHT/2 - 50, 110, 100);
-        game.batch.draw(lockedLevel, WORLD_WIDTH/2 - 237, WORLD_HEIGHT/2 - 200, 110, 100);
-        game.batch.draw(lockedLevel, WORLD_WIDTH/2 - 237 + 200, WORLD_HEIGHT/2 - 200, 110, 100);
-        game.batch.draw(lockedLevel, WORLD_WIDTH/2 - 237 + 400, WORLD_HEIGHT/2 - 200, 110, 100);
+        game.batch.draw(emptySlotTexture, 218, 185, 425, 80);
+        game.batch.draw(emptySlotTexture, 218, 70, 425, 80);
         game.batch.end();
 
         stage.act(delta);
@@ -163,8 +145,5 @@ public class levelChooseScreen implements Screen {
         // Destroy screen's assets here
         backgroundTexture.dispose();
         backButtonTexture.dispose();
-        levelOne.dispose();
-        levelTwo.dispose();
-        levelThree.dispose();
     }
 }

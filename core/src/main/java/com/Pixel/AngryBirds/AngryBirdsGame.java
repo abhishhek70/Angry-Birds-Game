@@ -25,8 +25,8 @@ public class AngryBirdsGame extends Game {
         camera = new OrthographicCamera();
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
-//        setScreen(new LoadingScreen(this));
-        setScreen(new HomeScreen(this));
+        setScreen(new LoadingScreen(this));
+//        setScreen(new HomeScreen(this));
     }
 
     @Override

@@ -24,11 +24,15 @@ public class HomeScreen implements Screen {
     private OrthographicCamera camera;
     private Viewport viewport;
 
-    Texture backgroundTexture;
-    Texture loadGameButtonTexture;
-    Texture playGameButtonTexture;
+    private Texture backgroundTexture;
+    private Texture loadGameButtonTexture;
+    private Texture playGameButtonTexture;
+    private Texture exitButtonTexture;
+    private Texture gameLogoTexture;
+
     private ImageButton imageButtonLoad;
     private ImageButton imageButtonPlay;
+    private ImageButton imageButtonExit;
 
     private Stage stage;
 
@@ -46,13 +50,13 @@ public class HomeScreen implements Screen {
         backgroundTexture = new Texture("homeScreenBackground.png");
         loadGameButtonTexture = new Texture("loadGameButton.png");
         playGameButtonTexture = new Texture("playGameButton.png");
+        exitButtonTexture = new Texture("exitButton.png");
+        gameLogoTexture = new Texture("gameLogo.png");
 
         Drawable buttonDrawableLoad = new TextureRegionDrawable(new TextureRegion(loadGameButtonTexture));
         Drawable buttonDrawablePlay = new TextureRegionDrawable(new TextureRegion(playGameButtonTexture));
+        Drawable buttonDrawableExit = new TextureRegionDrawable(new TextureRegion(exitButtonTexture));
 
-//        camera = new OrthographicCamera();
-//        viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
-//        camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
         this.camera = game.camera;
         this.viewport = game.viewport;
 
@@ -62,12 +66,16 @@ public class HomeScreen implements Screen {
 
         imageButtonPlay = new ImageButton(buttonDrawablePlay, buttonDrawablePlay);
         imageButtonPlay.setSize(200, 100);
-        imageButtonPlay.setPosition(WORLD_WIDTH/2 - 100, WORLD_HEIGHT/2 );
+        imageButtonPlay.setPosition(WORLD_WIDTH/2 - 100, WORLD_HEIGHT/2);
+
+        imageButtonExit = new ImageButton(buttonDrawableExit, buttonDrawableExit);
+        imageButtonExit.setSize(200, 100);
+        imageButtonExit.setPosition(WORLD_WIDTH/2 - 100, WORLD_HEIGHT/2 - 200);
 
         imageButtonLoad.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new LoadingScreen(game));  // Change it later
+                game.setScreen(new LoadGameScreen(game));  // Change it later
             }
         });
 
@@ -78,9 +86,17 @@ public class HomeScreen implements Screen {
             }
         });
 
+        imageButtonExit.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.exit(0);
+            }
+        });
+
         stage = new Stage(viewport);
         stage.addActor(imageButtonLoad);
         stage.addActor(imageButtonPlay);
+        stage.addActor(imageButtonExit);
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -100,6 +116,7 @@ public class HomeScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
+        game.batch.draw(gameLogoTexture, 110, 400, 600, 200);
         game.batch.end();
 
         stage.act(delta);
@@ -133,6 +150,7 @@ public class HomeScreen implements Screen {
         backgroundTexture.dispose();
         loadGameButtonTexture.dispose();
         playGameButtonTexture.dispose();
+        exitButtonTexture.dispose();
         stage.dispose();
     }
 }
