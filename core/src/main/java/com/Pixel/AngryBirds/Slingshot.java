@@ -3,8 +3,8 @@ package com.Pixel.AngryBirds;
 public class Slingshot extends GameObject {
     private Bird current_Bird;
 
-    public Slingshot(Vector2D position, float width, float height) {
-        super(position, width, height);
+    public Slingshot(AngryBirdsGame game, String texturePath, float x, float y, float width, float height) {
+        super(game, texturePath, x, y, width, height);
     }
 
     public void loadBird(Bird bird) {

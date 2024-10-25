@@ -5,8 +5,8 @@ public class Block extends GameObject {
     private String material;
     private int hitPoints;
 
-    public Block(Vector2D position, float width, float height, int health, String material, int hitPoints) {
-        super(position, width, height);
+    public Block(AngryBirdsGame game, String texturePath, float x, float y, float width, float height, String material, int hitPoints) {
+        super(game, texturePath, x, y, width, height);
         this.health = health;
         this.material = material;
         this.hitPoints = hitPoints;

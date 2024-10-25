@@ -1,13 +1,21 @@
 package com.Pixel.AngryBirds;
 
+import com.badlogic.gdx.graphics.Texture;
+
 public abstract class GameObject {
 
-    protected Vector2D position;  // Assuming you have a Vector2D class for 2D vectors
+    protected AngryBirdsGame game;
+    protected Texture objectTexture;
+    protected float x;
+    protected float y;
     protected float width;
     protected float height;
 
-    public GameObject(Vector2D position, float width, float height) {
-        this.position = position;
+    public GameObject(AngryBirdsGame game, String texturePath, float x, float y, float width, float height) {
+        this.game = game;
+        this.objectTexture = new Texture(texturePath);
+        this.x = x;
+        this.y = y;
         this.width = width;
         this.height = height;
     }
@@ -22,14 +30,11 @@ public abstract class GameObject {
         return false;  // if collision not detected
     }
 
-//    getters and setters
-    public Vector2D getPosition() {
-        return position;
+    public void draw(float posX, float posY){
+        game.batch.draw(objectTexture, posX, posY, width, height);
     }
 
-    public void setPosition(Vector2D position) {
-        this.position = position;
-    }
+//    getters and setters
 
     public float getWidth() {
         return width;

@@ -5,8 +5,8 @@ public abstract class Pig extends GameObject {
     protected String size;
     protected int hit_Points;
 
-    public Pig(Vector2D position, float width, float height, int health, String size, int hit_Points) {
-        super(position, width, height);
+    public Pig(AngryBirdsGame game, String texturePath, float x, float y, float width, float height, int health, String size, int hit_Points) {
+        super(game, texturePath, x, y, width, height);
         this.health = health;
         this.size = size;
         this.hit_Points = hit_Points;

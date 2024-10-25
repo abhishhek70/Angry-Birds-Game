@@ -4,8 +4,8 @@ public abstract class Bird extends GameObject {
     protected String type;
     protected Vector2D velocity;
 
-    public Bird(Vector2D position, float width, float height, String type) {
-        super(position, width, height);
+    public Bird(AngryBirdsGame game, String texturePath, float x, float y, float width, float height, String type) {
+        super(game, texturePath, x, y, width, height);
         this.type = type;
         this.velocity = new Vector2D(0, 0); // Initial velocity
     }

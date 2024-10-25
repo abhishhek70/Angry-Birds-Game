@@ -1,8 +1,8 @@
 package com.Pixel.AngryBirds;
 
 class ManagerPig extends Pig {
-    public ManagerPig(Vector2D position, float width, float height) {
-        super(position, width, height, 100, "medium", 20);
+    public ManagerPig(AngryBirdsGame game, String texturePath, float x, float y, float width, float height, int health) {
+        super(game, texturePath, x, y, width, height, 0, null, 0);
     }
 
     @Override

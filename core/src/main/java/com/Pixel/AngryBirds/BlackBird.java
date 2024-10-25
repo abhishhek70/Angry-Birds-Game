@@ -2,8 +2,8 @@ package com.Pixel.AngryBirds;
 
 public class BlackBird extends Bird {
 
-    public BlackBird(Vector2D position, float width, float height) {
-        super(position, width, height, "Black");
+    public BlackBird(AngryBirdsGame game, String texturePath, float x, float y, float width, float height) {
+        super(game, texturePath, x, y, width, height, "Black");
     }
 
     @Override
