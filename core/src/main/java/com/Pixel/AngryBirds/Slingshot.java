@@ -1,14 +1,14 @@
 package com.Pixel.AngryBirds;
 
 public class Slingshot extends GameObject {
-    private Bird currentBird;
+    private Bird current_Bird;
 
     public Slingshot(Vector2D position, float width, float height) {
         super(position, width, height);
     }
 
     public void loadBird(Bird bird) {
-        this.currentBird = bird;
+        this.current_Bird = bird;
     }
 
     public void aim(float angle) {

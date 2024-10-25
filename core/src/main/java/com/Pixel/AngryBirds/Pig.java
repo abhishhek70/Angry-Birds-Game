@@ -1,9 +1,9 @@
 package com.Pixel.AngryBirds;
 
-public class Pig extends GameObject {
-    private int health;
-    private String size;
-    private int hit_Points;
+public abstract class Pig extends GameObject {
+    protected int health;
+    protected String size;
+    protected int hit_Points;
 
     public Pig(Vector2D position, float width, float height, int health, String size, int hit_Points) {
         super(position, width, height);
@@ -12,24 +12,12 @@ public class Pig extends GameObject {
         this.hit_Points = hit_Points;
     }
 
-    public void takeDamage(int amt) {
-        health -= amt;
-        if (health < 0) {
-            health = 0;
-        }
-    }
-
-    public boolean isDestroyed() {
-        return health <= 0;
-    }
+    public abstract void takeDamage(int amt);
+    public abstract boolean isDestroyed();
 
     @Override
-    public void update() {
-    }
+    public abstract void update();
 
     @Override
-    public void render() {
-    }
+    public abstract void render();
 }
-
-
