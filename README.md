@@ -10,5 +10,6 @@
     Encapsulation: Classes properly encapsulate their data using private (-) and public (+) members. For example:
         Player has private attributes like userName and playerLevel
         Bird and Pig classes protect their internal states while providing public methods
-    Abstraction:  abstract classes (LevelDesign, GameObject) and , showing how common behaviors are abstracted.
+    Abstraction:  abstract classes (LevelDesign, GameObject,Pig and Bird), showing how common behaviors are abstracted.
+        There are also three types of Pigs and Birds which extends the Pig and the Bird class 
     Polymorphism: This is implied through the abstract classes , allowing different objects to be treated uniformly while having specific implementations.
