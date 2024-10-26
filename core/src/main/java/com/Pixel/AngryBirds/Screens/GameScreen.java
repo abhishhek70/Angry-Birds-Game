@@ -1,7 +1,6 @@
 package com.Pixel.AngryBirds.Screens;
 
-import com.Pixel.AngryBirds.AngryBirdsGame;
-import com.Pixel.AngryBirds.Slingshot;
+import com.Pixel.AngryBirds.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -27,6 +26,9 @@ public class GameScreen implements Screen {
     private Viewport viewport;
 
     private Slingshot slingshot;
+    private RedBird bird1;
+    private YellowBird bird2;
+    private BlackBird bird3;
 
     private Texture backgroundTexture;
     private Texture pauseButtonTexture;
@@ -41,7 +43,10 @@ public class GameScreen implements Screen {
     public GameScreen(AngryBirdsGame game){
         this.game = game;
 
-        this.slingshot = new Slingshot(game, "slingshot.png", 50, 50, 200, 100);
+        this.slingshot = new Slingshot(game, "slingshot.png", 125, 50, 50, 125);
+        this.bird1 = new RedBird(game, "redbird.png", 90, 60, 40, 40);
+        this.bird2 = new YellowBird(game, "yellowbird.png", 50, 65, 40, 40);
+        this.bird3 = new BlackBird(game, "blackbird.png", 10, 60, 40, 40);
 
         backgroundTexture = new Texture("gameBackground.jpg");
         pauseButtonTexture = new Texture("pauseButton.png");
@@ -84,6 +89,9 @@ public class GameScreen implements Screen {
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
         slingshot.draw();
+        bird1.draw();
+        bird2.draw();
+        bird3.draw();
         game.batch.end();
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {

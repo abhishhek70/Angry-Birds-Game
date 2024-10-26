@@ -1,9 +1,6 @@
 package com.Pixel.AngryBirds;
 
-import com.Pixel.AngryBirds.Screens.FirstScreen;
-import com.Pixel.AngryBirds.Screens.HomeScreen;
-import com.Pixel.AngryBirds.Screens.LoadingScreen;
-import com.Pixel.AngryBirds.Screens.PauseScreen;
+import com.Pixel.AngryBirds.Screens.*;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -26,9 +23,10 @@ public class AngryBirdsGame extends Game {
         camera = new OrthographicCamera();
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
-        setScreen(new LoadingScreen(this));
+//        setScreen(new LoadingScreen(this));
 //        setScreen(new PauseScreen(this));
 //        setScreen(new HomeScreen(this));
+        setScreen(new GameScreen(this));
     }
 
     @Override
