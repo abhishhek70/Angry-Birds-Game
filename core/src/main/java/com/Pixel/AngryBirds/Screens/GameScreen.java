@@ -42,6 +42,14 @@ public class GameScreen implements Screen {
     private Block horzWoodBlock9;
     private Block horzWoodBlock10;
 
+    private Block vertWoodBlock1;
+    private Block vertWoodBlock2;
+    private Block vertWoodBlock3;
+    private Block vertWoodBlock4;
+
+    private Block horzIceBlock1;
+    private Block horzIceBlock2;
+
     private InternPig pig1;
     private InternPig pig2;
 
@@ -77,6 +85,14 @@ public class GameScreen implements Screen {
 
         this.pig1 = new InternPig(game, "pig.png", 550, 110, 40, 40);
         this.pig2 = new InternPig(game, "pig.png", 650, 110, 40, 40);
+
+        this.vertWoodBlock1 = new Block(game, "woodBlockRectVertical.png", 530, 110, 10, 50);
+        this.vertWoodBlock2 = new Block(game, "woodBlockRectVertical.png", 600, 110, 10, 50);
+        this.vertWoodBlock3 = new Block(game, "woodBlockRectVertical.png", 630, 110, 10, 50);
+        this.vertWoodBlock4 = new Block(game, "woodBlockRectVertical.png", 700, 110, 10, 50);
+
+        this.horzIceBlock1 = new Block(game, "iceBlockRectHorizontal.png", 530, 160, 80, 10);
+        this.horzIceBlock2 = new Block(game, "iceBlockRectHorizontal.png", 630, 160, 80, 10);
 
         backgroundTexture = new Texture("gameBackground.jpg");
         pauseButtonTexture = new Texture("pauseButton.png");
@@ -134,6 +150,12 @@ public class GameScreen implements Screen {
         horzWoodBlock10.draw();
         pig1.draw();
         pig2.draw();
+        vertWoodBlock1.draw();
+        vertWoodBlock2.draw();
+        vertWoodBlock3.draw();
+        vertWoodBlock4.draw();
+        horzIceBlock1.draw();
+        horzIceBlock2.draw();
         game.batch.end();
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
