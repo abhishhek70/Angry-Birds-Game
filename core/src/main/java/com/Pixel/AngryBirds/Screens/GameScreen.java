@@ -30,6 +30,21 @@ public class GameScreen implements Screen {
     private YellowBird bird2;
     private BlackBird bird3;
 
+    private Block horzWoodBlock1;
+    private Block horzWoodBlock2;
+    private Block horzWoodBlock3;
+    private Block horzWoodBlock4;
+    private Block horzWoodBlock5;
+    private Block horzWoodBlock6;
+
+    private Block horzWoodBlock7;
+    private Block horzWoodBlock8;
+    private Block horzWoodBlock9;
+    private Block horzWoodBlock10;
+
+    private InternPig pig1;
+    private InternPig pig2;
+
     private Texture backgroundTexture;
     private Texture pauseButtonTexture;
 
@@ -47,6 +62,21 @@ public class GameScreen implements Screen {
         this.bird1 = new RedBird(game, "redbird.png", 90, 60, 40, 40);
         this.bird2 = new YellowBird(game, "yellowbird.png", 50, 65, 40, 40);
         this.bird3 = new BlackBird(game, "blackbird.png", 10, 60, 40, 40);
+
+        this.horzWoodBlock1 = new Block(game, "woodBlockRectHorizontal.png", 550, 50, 50, 15);
+        this.horzWoodBlock2 = new Block(game, "woodBlockRectHorizontal.png", 550, 65, 50, 15);
+        this.horzWoodBlock3 = new Block(game, "woodBlockRectHorizontal.png", 550, 80, 50, 15);
+        this.horzWoodBlock4 = new Block(game, "woodBlockRectHorizontal.png", 650, 50, 50, 15);
+        this.horzWoodBlock5 = new Block(game, "woodBlockRectHorizontal.png", 650, 65, 50, 15);
+        this.horzWoodBlock6 = new Block(game, "woodBlockRectHorizontal.png", 650, 80, 50, 15);
+
+        this.horzWoodBlock7 = new Block(game, "woodBlockRectHorizontal.png", 525, 95, 50, 15);
+        this.horzWoodBlock8 = new Block(game, "woodBlockRectHorizontal.png", 575, 95, 50, 15);
+        this.horzWoodBlock9 = new Block(game, "woodBlockRectHorizontal.png", 625, 95, 50, 15);
+        this.horzWoodBlock10 = new Block(game, "woodBlockRectHorizontal.png", 675, 95, 50, 15);
+
+        this.pig1 = new InternPig(game, "pig.png", 550, 110, 40, 40);
+        this.pig2 = new InternPig(game, "pig.png", 650, 110, 40, 40);
 
         backgroundTexture = new Texture("gameBackground.jpg");
         pauseButtonTexture = new Texture("pauseButton.png");
@@ -92,6 +122,18 @@ public class GameScreen implements Screen {
         bird1.draw();
         bird2.draw();
         bird3.draw();
+        horzWoodBlock1.draw();
+        horzWoodBlock2.draw();
+        horzWoodBlock3.draw();
+        horzWoodBlock4.draw();
+        horzWoodBlock5.draw();
+        horzWoodBlock6.draw();
+        horzWoodBlock7.draw();
+        horzWoodBlock8.draw();
+        horzWoodBlock9.draw();
+        horzWoodBlock10.draw();
+        pig1.draw();
+        pig2.draw();
         game.batch.end();
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {

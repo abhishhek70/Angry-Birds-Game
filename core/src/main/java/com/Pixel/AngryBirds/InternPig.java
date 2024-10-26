@@ -1,7 +1,7 @@
 package com.Pixel.AngryBirds;
 
-class InternPig extends Pig {
-    public InternPig(AngryBirdsGame game, String texturePath, float x, float y, float width, float height, int health) {
+public class InternPig extends Pig {
+    public InternPig(AngryBirdsGame game, String texturePath, float x, float y, float width, float height) {
         super(game, texturePath, x, y, width, height, 0, null, 0);
     }
 

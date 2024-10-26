@@ -5,11 +5,8 @@ public class Block extends GameObject {
     private String material;
     private int hitPoints;
 
-    public Block(AngryBirdsGame game, String texturePath, float x, float y, float width, float height, String material, int hitPoints) {
+    public Block(AngryBirdsGame game, String texturePath, float x, float y, float width, float height) {
         super(game, texturePath, x, y, width, height);
-        this.health = health;
-        this.material = material;
-        this.hitPoints = hitPoints;
     }
 
     @Override
