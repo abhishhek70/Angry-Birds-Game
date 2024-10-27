@@ -23,8 +23,9 @@
     1. Download the entire git repository as a ZIP file.
     2. Unzip it.
     3. Open the unzipped folder in IntelliJ IDEA IDE.
-    4. Open the file Lwjgl3Launcher.java, to open it use the following path:
+    4. Load the Gradle project when prompted by IntelliJ IDEA. 
+    5. Open the file Lwjgl3Launcher.java, to open it use the following path:
        Angry-Birds-Game-main -> lwjgl3 [Angry-Birds-Game-main.lwjgl3] -> src -> 
        main -> java -> com.Pixel.Angry.Birds.lwjgl3 -> Lwjgl3Launcher.java
-    5. If the JDK version is not selected, select it.
-    6. Run Lwjgl3Launcher.java.
+    6. If the JDK version is not selected, select it.
+    7. Run Lwjgl3Launcher.java.
