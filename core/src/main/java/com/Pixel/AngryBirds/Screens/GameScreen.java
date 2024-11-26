@@ -15,9 +15,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameScreen implements Screen {
 
@@ -29,6 +33,8 @@ public class GameScreen implements Screen {
     private RedBird bird1;
     private YellowBird bird2;
     private BlackBird bird3;
+
+    private List<Bird> availableBirds;
 
     private Block horzWoodBlock1;
     private Block horzWoodBlock2;
@@ -70,6 +76,11 @@ public class GameScreen implements Screen {
         this.bird1 = new RedBird(game, "redbird.png", 90, 60, 40, 40);
         this.bird2 = new YellowBird(game, "yellowbird.png", 50, 65, 40, 40);
         this.bird3 = new BlackBird(game, "blackbird.png", 10, 60, 40, 40);
+
+        availableBirds = new ArrayList<>();
+        availableBirds.add(bird1);
+        availableBirds.add(bird2);
+        availableBirds.add(bird3);
 
         this.horzWoodBlock1 = new Block(game, "woodBlockRectHorizontal.png", 550, 50, 50, 15);
         this.horzWoodBlock2 = new Block(game, "woodBlockRectHorizontal.png", 550, 65, 50, 15);
@@ -126,6 +137,43 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        input();
+        logic();
+        drawScreen(delta);
+    }
+
+    private void input() {
+
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            game.setScreen(new WinScreen(game));
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.L)) {
+            game.setScreen(new LoseScreen(game));
+        }
+
+//        if (slingshot.hasBird()) {
+//            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+//                System.out.println("Dragging\n");
+//            }
+//        }
+
+    }
+
+    private void logic() {
+
+        if (!slingshot.hasBird()) {
+            if (!availableBirds.isEmpty()) {
+                Bird current = availableBirds.get(0);
+                availableBirds.remove(0);
+                current.putOnSlingshot(slingshot.getX(), slingshot.getY()+slingshot.getHeight()-current.getHeight());
+                slingshot.setCurrentBird(current);
+            }
+        }
+
+    }
+
+    private void drawScreen(float delta) {
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -158,15 +206,9 @@ public class GameScreen implements Screen {
         horzIceBlock2.draw();
         game.batch.end();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            game.setScreen(new WinScreen(game));
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.L)) {
-            game.setScreen(new LoseScreen(game));
-        }
-
         stage.act(delta);
         stage.draw();
+
     }
 
     @Override
