@@ -48,6 +48,22 @@ public class Slingshot extends GameObject {
 //        bird.putOnSlingshot(getX(), getY());
 //    }
 
+    public float getX() {
+        return startPosition.x;
+    }
+
+    public float getY() {
+        return startPosition.y;
+    }
+
+    public boolean hasBird() {
+        return currentBird != null;
+    }
+
+    public void setCurrentBird(Bird currentBird) {
+        this.currentBird = currentBird;
+    }
+
     public void aim(Vector2 dragPosition) {
         if (currentBird != null) {
             currentBird.setPosition(dragPosition.x, dragPosition.y);

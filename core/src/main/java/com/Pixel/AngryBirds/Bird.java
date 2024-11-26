@@ -40,14 +40,12 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Bird extends GameObject {
     protected String type;
     protected Vector2 velocity;
-    protected Vector2 position;
     protected boolean isLaunched;
 
     public Bird(AngryBirdsGame game, String texturePath, float x, float y, float width, float height, String type) {
         super(game, texturePath, x, y, width, height);
         this.type = type;
         this.velocity = new Vector2(0, 0);
-        position = new Vector2(x, y);
         this.isLaunched = false;
     }
 
@@ -64,15 +62,16 @@ public abstract class Bird extends GameObject {
     }
 
     public void setPosition(float x, float y) {
-        this.position = new Vector2(x, y);
+        this.x = x;
+        this.y = y;
     }
 
     public float getX() {
-        return position.x;
+        return x;
     }
 
     public float getY() {
-        return position.y;
+        return y;
     }
 
     public Vector2 getVelocity() {
