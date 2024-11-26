@@ -26,7 +26,7 @@ public class AngryBirdsGame extends Game {
         setScreen(new LoadingScreen(this));
 //        setScreen(new PauseScreen(this));
 //        setScreen(new HomeScreen(this));
-//        setScreen(new GameScreen(this));
+        setScreen(new GameScreen1(this));
     }
 
     @Override

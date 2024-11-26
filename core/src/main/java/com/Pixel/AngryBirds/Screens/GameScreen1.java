@@ -70,28 +70,28 @@ public class GameScreen1 implements Screen {
         this.bird2 = new YellowBird(game, "yellowbird.png", 50, 65, 40, 40);
         this.bird3 = new BlackBird(game, "blackbird.png", 10, 60, 40, 40);
 
-        this.horzWoodBlock1 = new Block(game, "woodBlockRectHorizontal.png", 550, 50, 50, 15);
-        this.horzWoodBlock2 = new Block(game, "woodBlockRectHorizontal.png", 550, 65, 50, 15);
-        this.horzWoodBlock3 = new Block(game, "woodBlockRectHorizontal.png", 550, 80, 50, 15);
-        this.horzWoodBlock4 = new Block(game, "woodBlockRectHorizontal.png", 650, 50, 50, 15);
-        this.horzWoodBlock5 = new Block(game, "woodBlockRectHorizontal.png", 650, 65, 50, 15);
-        this.horzWoodBlock6 = new Block(game, "woodBlockRectHorizontal.png", 650, 80, 50, 15);
+        this.horzWoodBlock1 = new Block(game, "woodBlockRectHorizontal.png", 550, 50, 0, 0);
+        this.horzWoodBlock2 = new Block(game, "woodBlockRectHorizontal.png", 550, 65, 0, 0);
+        this.horzWoodBlock3 = new Block(game, "woodBlockRectHorizontal.png", 550, 80, 0, 0);
+        this.horzWoodBlock4 = new Block(game, "woodBlockRectHorizontal.png", 650, 50, 0, 0);
+        this.horzWoodBlock5 = new Block(game, "woodBlockRectHorizontal.png", 650, 65, 0, 0);
+        this.horzWoodBlock6 = new Block(game, "woodBlockRectHorizontal.png", 650, 80, 0, 0);
 
-        this.horzWoodBlock7 = new Block(game, "woodBlockRectHorizontal.png", 525, 95, 50, 15);
-        this.horzWoodBlock8 = new Block(game, "woodBlockRectHorizontal.png", 575, 95, 50, 15);
-        this.horzWoodBlock9 = new Block(game, "woodBlockRectHorizontal.png", 625, 95, 50, 15);
-        this.horzWoodBlock10 = new Block(game, "woodBlockRectHorizontal.png", 675, 95, 50, 15);
+        this.horzWoodBlock7 = new Block(game, "woodBlockRectHorizontal.png", 525, 40, 50, 15);
+        this.horzWoodBlock8 = new Block(game, "woodBlockRectHorizontal.png", 575, 40, 50, 15);
+        this.horzWoodBlock9 = new Block(game, "woodBlockRectHorizontal.png", 625, 95, 0, 0);
+        this.horzWoodBlock10 = new Block(game, "woodBlockRectHorizontal.png", 675, 95, 0, 0);
 
-        this.pig1 = new InternPig(game, "pig.png", 550, 110, 40, 40);
-        this.pig2 = new InternPig(game, "pig.png", 650, 110, 40, 40);
+        this.pig1 = new InternPig(game, "pig.png", 550, 55, 40, 40);
+        this.pig2 = new InternPig(game, "pig.png", 650, 110, 0, 0);
 
-        this.vertWoodBlock1 = new Block(game, "woodBlockRectVertical.png", 530, 110, 10, 50);
-        this.vertWoodBlock2 = new Block(game, "woodBlockRectVertical.png", 600, 110, 10, 50);
-        this.vertWoodBlock3 = new Block(game, "woodBlockRectVertical.png", 630, 110, 10, 50);
-        this.vertWoodBlock4 = new Block(game, "woodBlockRectVertical.png", 700, 110, 10, 50);
+        this.vertWoodBlock1 = new Block(game, "woodBlockRectVertical.png", 520, 50, 10, 50);
+        this.vertWoodBlock2 = new Block(game, "woodBlockRectVertical.png", 620, 50, 10, 50);
+        this.vertWoodBlock3 = new Block(game, "woodBlockRectVertical.png", 630, 110, 0, 0);
+        this.vertWoodBlock4 = new Block(game, "woodBlockRectVertical.png", 700, 110, 0, 0);
 
-        this.horzIceBlock1 = new Block(game, "iceBlockRectHorizontal.png", 530, 160, 80, 10);
-        this.horzIceBlock2 = new Block(game, "iceBlockRectHorizontal.png", 630, 160, 80, 10);
+        this.horzIceBlock1 = new Block(game, "iceBlockRectHorizontal.png", 530, 100, 90, 10);
+        this.horzIceBlock2 = new Block(game, "iceBlockRectHorizontal.png", 630, 160, 0, 0);
 
         backgroundTexture = new Texture("gameBackground.jpg");
         pauseButtonTexture = new Texture("pauseButton.png");
