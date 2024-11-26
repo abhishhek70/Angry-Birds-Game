@@ -126,6 +126,30 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        input();
+        logic();
+        draw(delta);
+    }
+
+    private void input() {
+
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            game.setScreen(new WinScreen(game));
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.L)) {
+            game.setScreen(new LoseScreen(game));
+        }
+
+
+
+    }
+
+    private void logic() {
+
+    }
+
+    private void draw(float delta) {
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -158,15 +182,9 @@ public class GameScreen implements Screen {
         horzIceBlock2.draw();
         game.batch.end();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            game.setScreen(new WinScreen(game));
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.L)) {
-            game.setScreen(new LoseScreen(game));
-        }
-
         stage.act(delta);
         stage.draw();
+
     }
 
     @Override
