@@ -41,14 +41,28 @@ public class Slingshot extends GameObject implements Serializable {
         this.currentBird = currentBird;
     }
 
+    public void placeBirdOnSlingshot(Bird bird) {
+        if (currentBird != null) {
+            // Return the current bird to its initial position
+            currentBird.setPosition(currentBird.getInitialX(), currentBird.getInitialY());
+        }
+        // Place the new bird on the slingshot
+        currentBird = bird;
+        currentBird.setPosition(startPosition.x, startPosition.y);
+    }
+
     public void startDragging(Vector2 dragPosition) {
-        this.isDragging = true;
-        this.dragPosition.set(dragPosition);
+        if (currentBird != null) {
+            this.isDragging = true;
+            this.dragPosition.set(dragPosition);
+        }
     }
 
     public void stopDragging(Vector2 releaseVelocity) {
-        this.isDragging = false;
-        launch(releaseVelocity);
+        if (currentBird != null) {
+            this.isDragging = false;
+            launch(releaseVelocity);
+        }
     }
 
     public void aim(Vector2 dragPosition) {
