@@ -23,6 +23,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +67,8 @@ public class GameScreen implements Screen {
     private Texture pauseButtonTexture;
 
     private ImageButton imageButtonPause;
+    private ImageButton saveButton;
+    private ImageButton loadButton;
 
     private Stage stage;
 
@@ -129,6 +132,29 @@ public class GameScreen implements Screen {
 
         stage = new Stage(viewport);
         stage.addActor(imageButtonPause);
+        saveButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("saveButton.png"))));
+        saveButton.setSize(100, 50);
+        saveButton.setPosition(100, WORLD_HEIGHT - 75);
+        saveButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                saveGame("savegame.dat");
+            }
+        });
+
+        stage.addActor(saveButton);
+        loadButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("loadButton.png"))));
+        loadButton.setSize(100, 50);
+        loadButton.setPosition(200, WORLD_HEIGHT - 75);
+        loadButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                loadGame("savegame.dat");
+            }
+        });
+
+        stage.addActor(loadButton);
+
 
         stage.addActor(bird1);
         stage.addActor(bird2);
@@ -203,6 +229,59 @@ public class GameScreen implements Screen {
             }
         }
 
+    }
+    public void saveGame(String filePath) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            oos.writeObject(slingshot);
+            oos.writeObject(availableBirds);
+            oos.writeObject(pig1);
+            oos.writeObject(pig2);
+            oos.writeObject(horzWoodBlock1);
+            oos.writeObject(horzWoodBlock2);
+            oos.writeObject(horzWoodBlock3);
+            oos.writeObject(horzWoodBlock4);
+            oos.writeObject(horzWoodBlock5);
+            oos.writeObject(horzWoodBlock6);
+            oos.writeObject(horzWoodBlock7);
+            oos.writeObject(horzWoodBlock8);
+            oos.writeObject(horzWoodBlock9);
+            oos.writeObject(horzWoodBlock10);
+            oos.writeObject(vertWoodBlock1);
+            oos.writeObject(vertWoodBlock2);
+            oos.writeObject(vertWoodBlock3);
+            oos.writeObject(vertWoodBlock4);
+            oos.writeObject(horzIceBlock1);
+            oos.writeObject(horzIceBlock2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadGame(String filePath) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
+            slingshot = (Slingshot) ois.readObject();
+            availableBirds = (List<Bird>) ois.readObject();
+            pig1 = (InternPig) ois.readObject();
+            pig2 = (InternPig) ois.readObject();
+            horzWoodBlock1 = (Block) ois.readObject();
+            horzWoodBlock2 = (Block) ois.readObject();
+            horzWoodBlock3 = (Block) ois.readObject();
+            horzWoodBlock4 = (Block) ois.readObject();
+            horzWoodBlock5 = (Block) ois.readObject();
+            horzWoodBlock6 = (Block) ois.readObject();
+            horzWoodBlock7 = (Block) ois.readObject();
+            horzWoodBlock8 = (Block) ois.readObject();
+            horzWoodBlock9 = (Block) ois.readObject();
+            horzWoodBlock10 = (Block) ois.readObject();
+            vertWoodBlock1 = (Block) ois.readObject();
+            vertWoodBlock2 = (Block) ois.readObject();
+            vertWoodBlock3 = (Block) ois.readObject();
+            vertWoodBlock4 = (Block) ois.readObject();
+            horzIceBlock1 = (Block) ois.readObject();
+            horzIceBlock2 = (Block) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void logic() {
