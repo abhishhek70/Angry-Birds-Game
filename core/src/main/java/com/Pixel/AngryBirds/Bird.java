@@ -4,7 +4,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
-public abstract class Bird extends GameObject {
+import java.io.Serializable;
+
+public abstract class Bird extends GameObject implements Serializable {
     protected String type;
     protected Vector2 velocity;
     protected boolean isLaunched;
