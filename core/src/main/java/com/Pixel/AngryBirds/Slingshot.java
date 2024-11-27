@@ -1,52 +1,23 @@
-//package com.Pixel.AngryBirds;
-//
-//public class Slingshot extends GameObject {
-//    private Bird current_Bird;
-//
-//    public Slingshot(AngryBirdsGame game, String texturePath, float x, float y, float width, float height) {
-//        super(game, texturePath, x, y, width, height);
-//    }
-//
-//    public void loadBird(Bird bird) {
-//        this.current_Bird = bird;
-//    }
-//
-//    public void aim(float angle) {
-//    }
-//
-//    public void launch(float angle, Vector2D initialVelocity) {
-//
-//    }
-//
-//    @Override
-//    public void update() {
-//    }
-//
-//    @Override
-//    public void render() {
-//    }
-//}
-//
-
 package com.Pixel.AngryBirds;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 public class Slingshot extends GameObject {
     private Bird currentBird;
     private boolean isDragging;
     private Vector2 startPosition;
+    private Vector2 dragPosition;
+    private ShapeRenderer shapeRenderer;
 
     public Slingshot(AngryBirdsGame game, String texturePath, float x, float y, float width, float height) {
         super(game, texturePath, x, y, width, height);
         this.startPosition = new Vector2(x, y);
+        this.dragPosition = new Vector2(x, y);
         this.isDragging = false;
+        this.shapeRenderer = new ShapeRenderer();
     }
-
-//    public void loadBird(Bird bird) {
-//        this.currentBird = bird;
-//        bird.putOnSlingshot(getX(), getY());
-//    }
 
     public float getX() {
         return startPosition.x;
@@ -60,12 +31,27 @@ public class Slingshot extends GameObject {
         return currentBird != null;
     }
 
+    public Bird getCurrentBird() {
+        return currentBird;
+    }
+
     public void setCurrentBird(Bird currentBird) {
         this.currentBird = currentBird;
     }
 
+    public void startDragging(Vector2 dragPosition) {
+        this.isDragging = true;
+        this.dragPosition.set(dragPosition);
+    }
+
+    public void stopDragging(Vector2 releaseVelocity) {
+        this.isDragging = false;
+        launch(releaseVelocity);
+    }
+
     public void aim(Vector2 dragPosition) {
         if (currentBird != null) {
+            this.dragPosition.set(dragPosition);
             currentBird.setPosition(dragPosition.x, dragPosition.y);
         }
     }
@@ -75,6 +61,25 @@ public class Slingshot extends GameObject {
             currentBird.setVelocity(releaseVelocity);
             currentBird.launch();
             currentBird = null;
+        }
+    }
+
+    public void drawProjectilePath() {
+        if (currentBird != null && isDragging) {
+            shapeRenderer.setProjectionMatrix(game.batch.getProjectionMatrix());
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+            shapeRenderer.setColor(Color.RED);
+
+            Vector2 position = new Vector2(dragPosition);
+            Vector2 velocity = new Vector2(dragPosition.x - startPosition.x, dragPosition.y - startPosition.y).scl(-1);
+
+            for (int i = 0; i < 100; i++) {
+                shapeRenderer.circle(position.x, position.y, 2);
+                position.add(velocity);
+                velocity.y -= 0.5f; // Simulate gravity
+            }
+
+            shapeRenderer.end();
         }
     }
 

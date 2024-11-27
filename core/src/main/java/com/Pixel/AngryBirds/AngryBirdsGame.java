@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class AngryBirdsGame extends Game {
 
     public SpriteBatch batch;
@@ -23,10 +22,10 @@ public class AngryBirdsGame extends Game {
         camera = new OrthographicCamera();
         viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         camera.position.set(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, 0);
-        setScreen(new LoadingScreen(this));
+//        setScreen(new LoadingScreen(this));
 //        setScreen(new PauseScreen(this));
 //        setScreen(new HomeScreen(this));
-        setScreen(new GameScreen1(this));
+        setScreen(new GameScreen(this));
     }
 
     @Override

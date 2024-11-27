@@ -66,9 +66,9 @@ public class GameScreen1 implements Screen {
     public GameScreen1(AngryBirdsGame game){
         this.game = game;
         this.slingshot = new Slingshot(game, "slingshot.png", 105, 50, 90, 135);
-        this.bird1 = new RedBird(game, "redbird.png", 90, 60, 40, 40);
-        this.bird2 = new YellowBird(game, "yellowbird.png", 50, 65, 40, 40);
-        this.bird3 = new BlackBird(game, "blackbird.png", 10, 60, 40, 40);
+        this.bird1 = new RedBird(game, "redbird.png", 90, 60, 40, 40, slingshot);
+        this.bird2 = new YellowBird(game, "yellowbird.png", 50, 65, 40, 40, slingshot);
+        this.bird3 = new BlackBird(game, "blackbird.png", 10, 60, 40, 40, slingshot);
 
         this.horzWoodBlock1 = new Block(game, "woodBlockRectHorizontal.png", 550, 50, 0, 0);
         this.horzWoodBlock2 = new Block(game, "woodBlockRectHorizontal.png", 550, 65, 0, 0);

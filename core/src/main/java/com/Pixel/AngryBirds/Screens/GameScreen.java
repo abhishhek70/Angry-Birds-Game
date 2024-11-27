@@ -73,9 +73,9 @@ public class GameScreen implements Screen {
         this.game = game;
 
         this.slingshot = new Slingshot(game, "slingshot.png", 105, 50, 90, 135);
-        this.bird1 = new RedBird(game, "redbird.png", 90, 60, 40, 40);
-        this.bird2 = new YellowBird(game, "yellowbird.png", 50, 65, 40, 40);
-        this.bird3 = new BlackBird(game, "blackbird.png", 10, 60, 40, 40);
+        this.bird1 = new RedBird(game, "redbird.png", 90, 60, 40, 40, slingshot);
+        this.bird2 = new YellowBird(game, "yellowbird.png", 50, 65, 40, 40, slingshot);
+        this.bird3 = new BlackBird(game, "blackbird.png", 10, 60, 40, 40, slingshot);
 
         availableBirds = new ArrayList<>();
         availableBirds.add(bird1);
@@ -127,7 +127,27 @@ public class GameScreen implements Screen {
         stage = new Stage(viewport);
         stage.addActor(imageButtonPause);
 
+        stage.addActor(bird1);
+        stage.addActor(bird2);
+        stage.addActor(bird3);
+
+        // Add click listeners for birds
+        addBirdClickListener(bird1);
+        addBirdClickListener(bird2);
+        addBirdClickListener(bird3);
+
         Gdx.input.setInputProcessor(stage);
+    }
+
+    private void addBirdClickListener(final Bird bird) {
+        bird.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (true) {
+                    bird.putOnSlingshot();
+                }
+            }
+        });
     }
 
     @Override
@@ -151,24 +171,11 @@ public class GameScreen implements Screen {
             game.setScreen(new LoseScreen(game));
         }
 
-//        if (slingshot.hasBird()) {
-//            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-//                System.out.println("Dragging\n");
-//            }
-//        }
-
     }
 
     private void logic() {
 
-        if (!slingshot.hasBird()) {
-            if (!availableBirds.isEmpty()) {
-                Bird current = availableBirds.get(0);
-                availableBirds.remove(0);
-                current.putOnSlingshot(slingshot.getX(), slingshot.getY()+slingshot.getHeight()-current.getHeight());
-                slingshot.setCurrentBird(current);
-            }
-        }
+//        bird1.putOnSlingshot();
 
     }
 
