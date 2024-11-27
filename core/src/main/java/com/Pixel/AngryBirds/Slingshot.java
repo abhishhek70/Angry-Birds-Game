@@ -32,7 +32,9 @@ package com.Pixel.AngryBirds;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Slingshot extends GameObject {
+import java.io.Serializable;
+
+public class Slingshot extends GameObject implements Serializable {
     private Bird currentBird;
     private boolean isDragging;
     private Vector2 startPosition;

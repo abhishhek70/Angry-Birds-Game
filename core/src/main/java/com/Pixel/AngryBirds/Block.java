@@ -1,6 +1,8 @@
 package com.Pixel.AngryBirds;
 
-public class Block extends GameObject {
+import java.io.Serializable;
+
+public class Block extends GameObject implements Serializable {
     private int health;
     private String material;
     private int hitPoints;

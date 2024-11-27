@@ -37,7 +37,9 @@ package com.Pixel.AngryBirds;
 
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class Bird extends GameObject {
+import java.io.Serializable;
+
+public abstract class Bird extends GameObject implements Serializable {
     protected String type;
     protected Vector2 velocity;
     protected boolean isLaunched;

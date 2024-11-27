@@ -1,6 +1,8 @@
 package com.Pixel.AngryBirds;
 
-public abstract class Pig extends GameObject {
+import java.io.Serializable;
+
+public abstract class Pig extends GameObject implements Serializable {
     protected int health;
     protected String size;
     protected int hit_Points;
