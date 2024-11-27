@@ -64,6 +64,8 @@ public class GameScreen implements Screen {
     private Texture pauseButtonTexture;
 
     private ImageButton imageButtonPause;
+    private ImageButton saveButton;
+    private ImageButton loadButton;
 
     private Stage stage;
 
@@ -127,6 +129,29 @@ public class GameScreen implements Screen {
 
         stage = new Stage(viewport);
         stage.addActor(imageButtonPause);
+        saveButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("saveButton.png"))));
+        saveButton.setSize(100, 50);
+        saveButton.setPosition(100, WORLD_HEIGHT - 75);
+        saveButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                saveGame("savegame.dat");
+            }
+        });
+
+        stage.addActor(saveButton);
+        loadButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture("loadButton.png"))));
+        loadButton.setSize(100, 50);
+        loadButton.setPosition(200, WORLD_HEIGHT - 75);
+        loadButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                loadGame("savegame.dat");
+            }
+        });
+
+        stage.addActor(loadButton);
+
 
         stage.addActor(bird1);
         stage.addActor(bird2);
