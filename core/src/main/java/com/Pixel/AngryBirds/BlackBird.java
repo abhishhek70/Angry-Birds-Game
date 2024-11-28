@@ -6,10 +6,10 @@ public class BlackBird extends Bird {
         super(game, texturePath, x, y, width, height, "Black", slingshot);
     }
 
-    @Override
-    public void applySpecialAbility() {
-        System.out.println("Blackbird has activated bomb");
-    }
+//    @Override
+//    public void update() {
+//
+//    }
 
     @Override
     public void render() {

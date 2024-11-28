@@ -1,3 +1,4 @@
+// core/src/main/java/com/Pixel/AngryBirds/Screens/GameScreen.java
 package com.Pixel.AngryBirds.Screens;
 
 import com.Pixel.AngryBirds.*;
@@ -22,6 +23,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -155,32 +157,11 @@ public class GameScreen implements Screen {
 
         stage.addActor(loadButton);
 
-
         stage.addActor(bird1);
         stage.addActor(bird2);
         stage.addActor(bird3);
 
-        // Add click listeners for birds
-//        addBirdClickListener(bird1);
-//        addBirdClickListener(bird2);
-//        addBirdClickListener(bird3);
-
-//        bird1.setTouchable(Touchable.enabled);
-//        bird2.setTouchable(Touchable.enabled);
-//        bird3.setTouchable(Touchable.enabled);
-
         Gdx.input.setInputProcessor(stage);
-    }
-
-    private void addBirdClickListener(Bird bird) {
-        bird.addListener(new ClickListener() {
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                if (true) {
-//                    bird.putOnSlingshot();
-//                }
-//            }
-        });
     }
 
     @Override
@@ -203,33 +184,8 @@ public class GameScreen implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.L)) {
             game.setScreen(new LoseScreen(game));
         }
-
-        if (Gdx.input.justTouched()) {
-            Vector2 touchPos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
-            Vector3 touchPos3 = new Vector3(touchPos.x, touchPos.y, 0);
-            camera.unproject(touchPos3);
-            touchPos.set(touchPos3.x, touchPos3.y);
-
-            if (bird1.getBoundingBox().contains(touchPos)) {
-                slingshot.placeBirdOnSlingshot(bird1);
-            } else if (bird2.getBoundingBox().contains(touchPos)) {
-                slingshot.placeBirdOnSlingshot(bird2);
-            } else if (bird3.getBoundingBox().contains(touchPos)) {
-                slingshot.placeBirdOnSlingshot(bird3);
-            }
-        }
-
-        if (slingshot.hasBird()) {
-            if (Gdx.input.isTouched()) {
-                Vector2 dragPos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
-                Vector3 dragPos3 = new Vector3(dragPos.x, dragPos.y, 0);
-                camera.unproject(dragPos3);
-                dragPos.set(dragPos3.x, dragPos3.y);
-                slingshot.aim(dragPos);
-            }
-        }
-
     }
+
     public void saveGame(String filePath) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
             oos.writeObject(slingshot);
@@ -286,8 +242,25 @@ public class GameScreen implements Screen {
 
     private void logic() {
 
-//        bird1.putOnSlingshot();
+        List<Bird> birdsToRemove = new ArrayList<>();
+        for (Bird bird : availableBirds) {
+            bird.update();
+            float birdX = bird.getX();
+            float birdY = bird.getY();
+            if (birdX < -bird.getWidth() || birdX > WORLD_WIDTH || birdY < -bird.getHeight() || birdY > WORLD_HEIGHT) {
+                birdsToRemove.add(bird);
+            }
+        }
+        for (Bird bird : birdsToRemove) {
+            removeBird(bird);
+            stage.getActors().removeValue(bird, true);
+        }
 
+    }
+
+    public void removeBird(Bird bird) {
+        availableBirds.remove(bird);
+        stage.getActors().removeValue(bird, true);
     }
 
     private void drawScreen(float delta) {
@@ -301,9 +274,9 @@ public class GameScreen implements Screen {
         game.batch.begin();
         game.batch.draw(backgroundTexture, 0, 0, WORLD_WIDTH, WORLD_HEIGHT);
         slingshot.draw();
-        bird1.draw();
-        bird2.draw();
-        bird3.draw();
+        for (Bird bird : availableBirds) {
+            bird.draw();
+        }
         horzWoodBlock1.draw();
         horzWoodBlock2.draw();
         horzWoodBlock3.draw();
@@ -324,7 +297,10 @@ public class GameScreen implements Screen {
         horzIceBlock2.draw();
         game.batch.end();
 
-        slingshot.drawProjectilePath();
+        ShapeRenderer shapeRenderer = new ShapeRenderer();
+        shapeRenderer.setProjectionMatrix(camera.combined);
+        slingshot.drawProjectilePath(shapeRenderer);
+        shapeRenderer.dispose();
 
         stage.act(delta);
         stage.draw();

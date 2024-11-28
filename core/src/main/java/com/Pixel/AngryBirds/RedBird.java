@@ -6,11 +6,9 @@ public class RedBird extends Bird {
         super(game, texturePath, x, y, width, height, "Red", slingshot);
     }
 
-    @Override
-    public void applySpecialAbility() {
-
-        System.out.println("RedBird has no special ability.");
-    }
+//    @Override
+//    public void update() {
+//    }
 
     @Override
     public void render() {
