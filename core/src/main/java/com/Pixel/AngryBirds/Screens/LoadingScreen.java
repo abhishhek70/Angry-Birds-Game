@@ -59,7 +59,7 @@ public class LoadingScreen implements Screen {
         game.batch.end();
 
         timeElapsed += delta;
-        if (timeElapsed > 2) {
+        if (timeElapsed > 6) {
             game.setScreen(new HomeScreen(game));
         }
     }

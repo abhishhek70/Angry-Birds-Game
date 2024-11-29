@@ -60,9 +60,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
-public abstract class GameObject extends Actor {
-    protected AngryBirdsGame game;
-    protected Texture texture;
+import java.io.Serializable;
+
+public abstract class GameObject extends Actor implements Serializable {
+    protected transient AngryBirdsGame game;
+    protected transient Texture texture;
     protected float x, y, width, height;
 
     public GameObject(AngryBirdsGame game, String texturePath, float x, float y, float width, float height) {

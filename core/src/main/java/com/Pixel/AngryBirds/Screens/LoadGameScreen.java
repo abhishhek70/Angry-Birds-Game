@@ -77,14 +77,18 @@ public class LoadGameScreen implements Screen {
         imageButtonFilledSlotOne.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));  // Change it later
+//                GameScreen gameScreen = new GameScreen(game);
+//                gameScreen.loadGame("savegame.dat");
+                game.setScreen(new GameScreen2(game));
             }
         });
 
         imageButtonFilledSLotTwo.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new GameScreen(game));  // Change it later
+                GameScreen gameScreen = new GameScreen(game);
+                gameScreen.loadGame("savegame.dat");
+                game.setScreen(gameScreen);  // Change it later
             }
         });
 
