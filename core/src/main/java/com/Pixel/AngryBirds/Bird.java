@@ -1,11 +1,17 @@
 // core/src/main/java/com/Pixel/AngryBirds/Bird.java
 package com.Pixel.AngryBirds;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 import java.io.Serializable;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
+
 
 public abstract class Bird extends GameObject implements Serializable {
     protected String type;
@@ -18,12 +24,17 @@ public abstract class Bird extends GameObject implements Serializable {
     private boolean isDragged = false;
     private boolean isLaunched = false;
     private boolean hasStopped = false;
+    private transient Body body;
 
     private Vector2 velocity;
     private Vector2 acceleration;
+    private transient Sound launchSound;
+    private boolean isLaunchSoundPlaying = false; // Boolean flag to track if the sound is playing
+
+
 
     Bird previousBird = null;
-    private static final float GROUND_LEVEL = 50;
+    public static final float GROUND_LEVEL = 50;
 
     public Bird(AngryBirdsGame game, String texturePath, float x, float y, float width, float height, String type, Slingshot slingshot) {
         super(game, texturePath, x, y, width, height);
@@ -34,6 +45,8 @@ public abstract class Bird extends GameObject implements Serializable {
         this.onSlingshot = false;
         this.velocity = new Vector2(0, 0);
         this.acceleration = new Vector2(0, -0.07f); // Gravity
+        this.launchSound = Gdx.audio.newSound(Gdx.files.internal("launch.mp3"));
+
 
         addListener(new InputListener() {
             @Override
@@ -69,16 +82,31 @@ public abstract class Bird extends GameObject implements Serializable {
                     setPosition(newX, newY);
                     slingshot.setDragPosition(newX, newY);
                 }
+                if (!isLaunchSoundPlaying) {
+                    launchSound.loop();
+                    isLaunchSoundPlaying = true;
+                }
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 isDragged = false;
+                launchSound.stop();
+                isLaunchSoundPlaying = false; // Reset the flag when the dragging stops
+
                 if (previousBird != null && previousBird == Bird.this) {
                     launch();
                 }
             }
         });
+    }
+    public void setBody(Body body) {
+        this.body = body;
+        body.setUserData(this);
+    }
+
+    public Body getBody() {
+        return body;
     }
 
     public void putOnSlingshot() {
@@ -134,12 +162,18 @@ public abstract class Bird extends GameObject implements Serializable {
             float newX = oldX + velocity.x*timeSoFar + 0.5f*acceleration.x*timeSoFar*timeSoFar;
             float newY = oldY + velocity.y*timeSoFar + 0.5f*acceleration.y*timeSoFar*timeSoFar;
             setPosition(newX, newY);
+            if (body != null) {
+                body.setTransform(newX, newY, body.getAngle());
+            }
             if (newY < GROUND_LEVEL) { // Check if the bird is below the ground level
                 newY = GROUND_LEVEL; // Set the bird's position to the ground level
                 velocity.set(0, 0); // Stop the bird's movement
                 hasStopped = true; // Mark the bird as not launched
             }
             timeSoFar++;
+            if (body != null) {
+                setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
+            }
         }
     }
 
