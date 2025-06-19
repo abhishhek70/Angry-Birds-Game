@@ -1,7 +1,7 @@
 *Group Members**:
 
-    1. Abhishek (2023026)
-    2. Aditya K Jaiswal (2023039)
+    1. Abhishek
+    2. Aditya K Jaiswal
 
 **Steps to download and run the project**
     
