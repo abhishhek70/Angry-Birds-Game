@@ -3,6 +3,18 @@
     1. Abhishek (2023026)
     2. Aditya K Jaiswal (2023039)
 
+**Steps to download and run the project**
+    
+    1. Download the entire git repository as a ZIP file.
+    2. Unzip it.
+    3. Open the unzipped folder in IntelliJ IDEA IDE.
+    4. Load the Gradle project when prompted by IntelliJ IDEA. 
+    5. Open the file Lwjgl3Launcher.java, to open it use the following path:
+       Angry-Birds-Game-main -> lwjgl3 [Angry-Birds-Game-main.lwjgl3] -> src -> 
+       main -> java -> com.Pixel.Angry.Birds.lwjgl3 -> Lwjgl3Launcher.java
+    6. If the JDK version is not selected, select it.
+    7. Run Lwjgl3Launcher.java.
+
 **OOPS CONCEPTS USED**:
 
     -> Inheritance: inheritance can be through the abstract class GameObject which likely serves as a base class for game elements.
@@ -18,14 +30,4 @@
        There are also three types of Pigs and Birds which extends the Pig and the Bird class 
     -> Polymorphism: This is implied through the abstract classes , allowing different objects to be treated uniformly while having specific implementations.
 
-**Steps to download and run the project**
-    
-    1. Download the entire git repository as a ZIP file.
-    2. Unzip it.
-    3. Open the unzipped folder in IntelliJ IDEA IDE.
-    4. Load the Gradle project when prompted by IntelliJ IDEA. 
-    5. Open the file Lwjgl3Launcher.java, to open it use the following path:
-       Angry-Birds-Game-main -> lwjgl3 [Angry-Birds-Game-main.lwjgl3] -> src -> 
-       main -> java -> com.Pixel.Angry.Birds.lwjgl3 -> Lwjgl3Launcher.java
-    6. If the JDK version is not selected, select it.
-    7. Run Lwjgl3Launcher.java.
+
