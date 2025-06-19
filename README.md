@@ -30,4 +30,26 @@
        There are also three types of Pigs and Birds which extends the Pig and the Bird class 
     -> Polymorphism: This is implied through the abstract classes , allowing different objects to be treated uniformly while having specific implementations.
 
+## Game Screens
+
+### Home Screen
+![Home Screen](images/homeScreen.png)
+
+### Loading Screen
+![Load Screen](images/loadScreen.png)
+
+### level Select Screen
+![Level Select Screen](images/levelSelectScreen.png)
+![Saved Level Screen](images/savedLevelScreen.png)
+
+### Game Screens
+![Game Screen](images/gameScreen1.png)
+![Game Screen](images/gameScreen2.png)
+![Game Screen](images/gameScreen3.png)
+![Game Screen](images/gameScreen4.png)
+
+### Win/Lose Screen
+![Win Screen](images/winScreen.png)
+![Lost Screen](images/loseScreen.png)
+
 
